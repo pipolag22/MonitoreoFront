@@ -1,0 +1,53 @@
+@use "./../../../assets/styles/variables.scss";
+
+.container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  padding: 20px;
+}
+
+#contenido {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 20px;
+  padding: 40px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  background-color: #f9f9f9;
+}
+
+h1 {
+  font-size: 3rem;
+  color: #333;
+  margin: 0;
+}
+
+h2 {
+  font-size: 2rem;
+  color: #666;
+  margin: 0;
+}
+
+a {
+  font-size: 1.2rem;
+  color: variables.$button-color;
+  text-decoration: none;
+  font-weight: bold;
+  margin-top: 20px;
+  padding: 10px 20px;
+  border: 2px solid variables.$button-color;
+  border-radius: 5px;
+  transition: background-color 0.3s, color 0.3s;
+
+  &:hover {
+    background-color: variables.$button-color;
+    color: white;
+  }
+}
