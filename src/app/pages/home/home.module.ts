@@ -4,15 +4,8 @@ import { HomeComponent } from './home.component';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-
 @NgModule({
-  declarations: [
-    HomeComponent
-  ],
-  imports: [
-    CommonModule,
-    HomeRoutingModule,
-    FormsModule
-  ]
+  declarations: [HomeComponent],
+  imports: [CommonModule, HomeRoutingModule, FormsModule],
 })
-export class HomeModule { }
+export class HomeModule {}

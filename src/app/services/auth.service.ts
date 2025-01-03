@@ -8,11 +8,11 @@ import { LoginData, RegisterData } from '../interfaces/User';
 })
 export class AuthService {
   constructor() {
-    this.token.set(localStorage.getItem('token')); //verifica si hay token y lo asigna al estado
+    this.token.set(localStorage.getItem('token'));
   }
 
   router = inject(Router);
-  token: WritableSignal<string | null> = signal(null); //gestiona forma que reactiva el token. su valor inicial es null
+  token: WritableSignal<string | null> = signal(null);
 
   async login(loginData: LoginData) {
     try {

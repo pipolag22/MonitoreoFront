@@ -6,31 +6,25 @@
     </div>
   </header>
 
-  <!-- Estadísticas globales -->
   <section class="global-stats">
     <div class="stat-card">
       <h2>Lecturas OK</h2>
-      <p>1,234</p>
-      <span class="icon-ok"></span>
+      <p *ngIf="!plantas.length">Sin datos</p>
     </div>
     <div class="stat-card">
       <h2>Alertas medias</h2>
-      <p>932</p>
-      <span class="icon-warning"></span>
+      <p *ngIf="!plantas.length">Sin datos</p>
     </div>
     <div class="stat-card">
       <h2>Alertas rojas</h2>
-      <p>932</p>
-      <span class="icon-alert"></span>
+      <p *ngIf="!plantas.length">Sin datos</p>
     </div>
     <div class="stat-card">
       <h2>Sensores deshabilitados</h2>
-      <p>932</p>
-      <span class="icon-disabled"></span>
+      <p *ngIf="!plantas.length">Sin datos</p>
     </div>
   </section>
 
-  <!-- Tabla de plantas -->
   <section class="plants-section">
     <h2>Plantas</h2>
     <button class="add-plant">+ Crear nueva planta</button>
@@ -46,6 +40,9 @@
         </tr>
       </thead>
       <tbody>
+        <tr *ngIf="!plantas.length">
+          <td colspan="6" class="no-data">No hay datos disponibles</td>
+        </tr>
         <tr *ngFor="let planta of plantas">
           <td>{{ planta.pais }}</td>
           <td>{{ planta.nombre }}</td>
@@ -61,8 +58,11 @@
     </table>
   </section>
 
-  <!-- Indicadores inferiores -->
   <section class="indicators">
+    <h2>Indicadores</h2>
+    <div *ngIf="!indicadores.length" class="no-data">
+      No hay indicadores disponibles
+    </div>
     <div *ngFor="let indicador of indicadores" class="indicator">
       <h3>{{ indicador.titulo }}</h3>
       <p>{{ indicador.valor }}</p>

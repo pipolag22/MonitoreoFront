@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PlantasService } from 'src/app/services/plantas.service';
+import { PaisesService } from 'src/app/services/paises.service';
 
 @Component({
   selector: 'app-home',
@@ -7,12 +8,26 @@ import { PlantasService } from 'src/app/services/plantas.service';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  plantas: any[] = []; // Almacenar las plantas obtenidas del backend
+  plantas: any[] = [];
+  indicadores: any[] = [];
+  paises: string[] = [];
+  nuevaPlanta: any = {
+    pais: '',
+    nombre: '',
+    lecturas: 0,
+    alertasMedias: 0,
+    alertasRojas: 0,
+  };
 
-  constructor(private plantasService: PlantasService) {}
+  constructor(
+    private plantasService: PlantasService,
+    private paisesSerPvice: PaisesService
+  ) {}
 
   ngOnInit(): void {
     this.obtenerPlantas();
+    this.obtenerPaises();
+    this.obtenerIndicadores();
   }
 
   obtenerPlantas(): void {
@@ -26,19 +41,30 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  agregarPlanta(): void {
-    const nuevaPlanta = {
-      pais: 'Chile',
-      nombre: 'Nueva Planta',
-      lecturas: 100,
-      alertasMedias: 5,
-      alertasRojas: 1,
-    };
+  obtenerPaises(): void {
+    this.paisesSerPvice.getPaises().subscribe({
+      next: (data) => {
+        this.paises = data;
+      },
+      error: (err) => {
+        console.error('Error al obtener países:', err);
+      },
+    });
+  }
 
-    this.plantasService.createPlanta(nuevaPlanta).subscribe({
+  agregarPlanta(): void {
+    if (!this.nuevaPlanta.pais || !this.nuevaPlanta.nombre) {
+      console.warn(
+        'Por favor, complete todos los campos antes de agregar una planta.'
+      );
+      return;
+    }
+
+    this.plantasService.createPlanta(this.nuevaPlanta).subscribe({
       next: (data) => {
         console.log('Planta creada:', data);
-        this.obtenerPlantas(); // Actualizar la lista
+        this.obtenerPlantas();
+        this.resetNuevaPlanta();
       },
       error: (err) => {
         console.error('Error al crear planta:', err);
@@ -52,7 +78,7 @@ export class HomeComponent implements OnInit {
     this.plantasService.updatePlanta(planta.id, plantaEditada).subscribe({
       next: (data) => {
         console.log('Planta actualizada:', data);
-        this.obtenerPlantas(); // Actualizar la lista
+        this.obtenerPlantas();
       },
       error: (err) => {
         console.error('Error al actualizar planta:', err);
@@ -64,11 +90,29 @@ export class HomeComponent implements OnInit {
     this.plantasService.deletePlanta(id).subscribe({
       next: () => {
         console.log('Planta eliminada');
-        this.obtenerPlantas(); // Actualizar la lista
+        this.obtenerPlantas();
       },
       error: (err) => {
         console.error('Error al eliminar planta:', err);
       },
     });
+  }
+
+  obtenerIndicadores(): void {
+    this.indicadores = [
+      { titulo: 'Temperatura', valor: 'Sin datos' },
+      { titulo: 'Presión', valor: 'Sin datos' },
+      { titulo: 'Viento', valor: 'Sin datos' },
+    ];
+  }
+
+  resetNuevaPlanta(): void {
+    this.nuevaPlanta = {
+      pais: '',
+      nombre: '',
+      lecturas: 0,
+      alertasMedias: 0,
+      alertasRojas: 0,
+    };
   }
 }
