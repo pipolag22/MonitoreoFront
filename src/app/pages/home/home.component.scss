@@ -1,221 +1,129 @@
-@use "./../../../assets/styles/variables.scss";
-
-// General Container
-.container {
-  width: 100%;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
+.home-container {
   padding: 20px;
+  background-color: #f8f9fa;
 
-  header {
-    width: 100%;
+  .header {
     display: flex;
-    justify-content: flex-end;
-    padding: 15px 20px;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
 
-    #logout {
-      padding: 8px 15px;
-      background-color: #e74c3c;
+    h1 {
+      font-size: 2rem;
+      color: #333;
+    }
+
+    .user-info {
+      font-size: 1rem;
+      color: #666;
+    }
+  }
+
+  .global-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 20px;
+
+    .stat-card {
+      padding: 20px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      text-align: center;
+
+      h2 {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+      }
+
+      p {
+        font-size: 1.5rem;
+        font-weight: bold;
+      }
+
+      span {
+        display: inline-block;
+        margin-top: 10px;
+        font-size: 2rem;
+        color: #007bff;
+      }
+    }
+  }
+
+  .plants-section {
+    margin-bottom: 20px;
+
+    h2 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+
+    .add-plant {
+      margin-bottom: 10px;
+      padding: 10px 20px;
+      background-color: #007bff;
       color: white;
       border: none;
       border-radius: 5px;
       cursor: pointer;
-      transition: background-color 0.3s;
-
-      &:hover {
-        background-color: #c0392b;
-      }
     }
-  }
 
-  #titulo-principal {
-    margin-bottom: 30px;
-    font-size: 2.5rem;
-    color: #333;
-    text-align: center;
-  }
-
-  .container-general {
-    width: 100%;
-    max-width: 1200px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: black;
-    padding: 20px;
-
-    .main-container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    table {
       width: 100%;
-      margin-bottom: 30px;
+      border-collapse: collapse;
 
-      .ver-monedas {
-        #verMonedas {
-          padding: 10px 20px;
-          background-color: #007bff;
-          color: white;
-          border: none;
-          border-radius: 5px;
-          cursor: pointer;
-          transition: background-color 0.3s;
-
-          &:hover {
-            background-color: #0056b3;
-          }
-        }
+      th,
+      td {
+        padding: 10px;
+        border: 1px solid #ddd;
+        text-align: left;
       }
 
-      .subs {
-        text-align: right;
+      th {
+        background-color: #f1f1f1;
+      }
 
-        #button-sub {
-          padding: 10px 20px;
-          background-color: #007bff;
-          color: white;
-          border: none;
-          border-radius: 5px;
-          cursor: pointer;
-          transition: background-color 0.3s;
+      .edit,
+      .delete {
+        padding: 5px 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
 
-          &:hover {
-            background-color: #0056b3;
-          }
-        }
+      .edit {
+        background-color: #28a745;
+        color: white;
+      }
 
-        p {
-          margin-top: 10px;
-          font-size: 1rem;
-        }
+      .delete {
+        background-color: #dc3545;
+        color: white;
       }
     }
+  }
 
-    .conversion-container {
-      background-color: #ffffff;
-      border-radius: 15px;
-      padding: 20px;
-      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-      max-width: 400px;
+  .indicators {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 10px;
 
-      .currency-converter {
-        .convert-section {
-          display: flex;
-          flex-direction: column;
-          margin-bottom: 15px;
-
-          label {
-            margin-bottom: 5px;
-            font-weight: bold;
-            color: black;
-          }
-
-          .currency-input {
-            display: flex;
-            align-items: center;
-            position: relative;
-
-            input {
-              flex: 1;
-              padding: 10px;
-              font-size: 16px;
-              margin-left: 10px;
-              border: 1px solid #ccc;
-              border-radius: 5px;
-            }
-
-            .dropdown {
-              position: relative;
-              cursor: pointer;
-              border: 1px solid #ccc;
-              border-radius: 5px;
-              padding: 10px;
-              background-color: #f9f9f9;
-
-              .dropdown-toggle {
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-
-                .arrow {
-                  margin-left: 10px;
-                  transition: transform 0.3s;
-                }
-              }
-
-              .open .arrow {
-                transform: rotate(180deg);
-              }
-
-              .dropdown-menu {
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background-color: #ffffff;
-                border: 1px solid #ccc;
-                border-radius: 5px;
-                box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-                list-style: none;
-                padding: 0;
-                margin: 5px 0 0 0;
-                z-index: 10;
-
-                li {
-                  padding: 10px;
-                  cursor: pointer;
-                  transition: background-color 0.2s;
-
-                  &:hover {
-                    background-color: #f0f0f0;
-                  }
-                }
-
-                .titulo-moneda {
-                  font-weight: bold;
-                  padding: 5px 10px;
-                  background-color: #f1f1f1;
-                }
-              }
-            }
-          }
-        }
-
-        #convertir {
-          width: 100%;
-          padding: 10px;
-          background-color: #007bff;
-          color: white;
-          border: none;
-          border-radius: 5px;
-          cursor: pointer;
-          transition: background-color 0.3s;
-
-          &:hover {
-            background-color: #0056b3;
-          }
-
-          &:disabled {
-            background-color: #cccccc;
-            cursor: not-allowed;
-          }
-        }
-      }
-    }
-
-    .resultado {
-      margin-top: 20px;
-      color: black;
+    .indicator {
+      padding: 10px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
       text-align: center;
 
-      #conversion-resultado {
-        font-size: 1.5rem;
+      h3 {
+        font-size: 1rem;
+        margin-bottom: 5px;
+      }
+
+      p {
+        font-size: 1.2rem;
         font-weight: bold;
-        margin: 0;
-        display: inline;
       }
     }
   }
